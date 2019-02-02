@@ -6,7 +6,7 @@
 
 ### Course Content:
 
-| Date              | Topics & Assignment                                |
+| Date              | Topics & Assignments                               |
 |-------------------|----------------------------------------------------|
 | Week 1            | Introduction to the Course & Backgroud information |
 | Week 2            | Hadoop Concepts                                    |
