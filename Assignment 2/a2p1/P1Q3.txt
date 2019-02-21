@@ -1,0 +1,1 @@
+sqoop import --connect jdbc:mysql://localhost/employees --username cloudera --password cloudera --table employees --hbase-table employees_hbase --hbase-row-key emp_no --column-family infos -m 8
