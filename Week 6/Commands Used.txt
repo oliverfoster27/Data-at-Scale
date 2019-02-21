@@ -1,0 +1,11 @@
+flume-ng agent -n agent1 -f agent1.conf -c conf
+
+flume-ng agent -n agent1 -f agent1-hdfs.conf -c conf
+
+flume-ng agent -n agtex3 -f avro-client.conf -c conf
+
+flume-ng avro-client -H localhost -p 41415 -F input-1.txt
+
+fuser -k 41415/tcp
+
+flume-ng agent -n agent4 -f agt-spooldir.conf -c conf
