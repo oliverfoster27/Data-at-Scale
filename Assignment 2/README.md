@@ -8,3 +8,4 @@
 
 - For the Flume portion of this assignment the agent was tested by opening a telnet shell (typing "telnet localhost 45454" into the terminal) and typing the words "USD", "EUR", and "GARBAGE" into the shell
 - If the USD text went to the USD hdfs directory, EUR went to the EUR hdfs directory, and GARBAGE went to the GNL directory the agent is working as intended
+- "fuser -k 45454/tcp" was used to kill the connection over that host (telnet and the agent itself)
