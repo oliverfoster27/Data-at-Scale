@@ -1,0 +1,1 @@
+flume-ng agent -n agt1 -f P2Q1.conf -c conf
