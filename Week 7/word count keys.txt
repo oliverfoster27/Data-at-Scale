@@ -1,0 +1,36 @@
+/* Load the file from the local file system*/
+val textFile = sc.textFile("file:///home/cloudera/Downloads/5000-8.txt")
+
+/* load the file from HDFS */
+/* 
+val textFile = sc.textFile("/user/cloudera/Spark/5000-8.txt")
+*/
+/* or */
+/* 
+val textFile = sc.textFile("hdfs:///user/cloudera/Spark/5000-8.txt")
+*/
+
+
+textFile.count
+
+textFile.getNumPartitions
+
+textFile.first()
+
+
+val lineWithSpark = textFile.filter(line => line.contains("The")).count
+
+
+textFile.map(line => line.split(" ").size).reduce((a,b) => if (a > b) a else b)
+
+
+import java.lang.Math
+
+textFile.map(line => line.split(" ").size).reduce((a,b) => Math.max(a, b))
+
+
+val wordCounts = textFile.flatMap(line => line.split(" ")).map(word => (word, 1)).reduceByKey((a, b) => a + b)
+
+wordCounts.collect
+
+
