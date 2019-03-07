@@ -101,4 +101,5 @@ agent1.channels.mem_channel.transactionCapacity = 100
 agent1.sinks.hdfs_sink.type = hdfs
 agent1.sinks.hdfs_sink.hdfs.path = /user/bcg/sensors_in/%Y/%m/%d
 agent1.sinks.hdfs_sink.hdfs.fileType = DataStream
+agent1.sinks.hdfs_sink.hdfs.useLocalTimeStamp = true
 agent1.sinks.hdfs_sink.channel = mem_channel
