@@ -1,0 +1,23 @@
+
+create table split_words as select id as id,split(text,' ') as words from twitter.tweets;
+select * from split_words limit 10;
+
+create table tweet_word as select id as id,word from split_words 
+LATERAL VIEW explode(words) w as word;
+
+select * from tweet_word limit 20;
+
+create table dictionary(word string,rating int) 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+
+LOAD DATA INPATH '/user/cloudera/AFINN.txt' into TABLE dictionary;
+
+select * from dictionary limit 10;
+
+create table word_join as select tweet_word.id,tweet_word.word,dictionary.rating 
+from tweet_word LEFT OUTER JOIN dictionary ON(tweet_word.word = dictionary.word);
+
+select * from word_join limit 15;
+
+select id,AVG(rating) as rating 
+from word_join GROUP BY word_join.id order by rating DESC;

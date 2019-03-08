@@ -1,0 +1,30 @@
+MSCK REPAIR TABLE twitter.tweets;
+
+SHOW PARTITIONS twitter.tweets;
+
+select * from twitter.tweets limit 10;
+
+select count(*) from twitter.tweets;
+
+select lang , COUNT(*) as count from  twitter.tweets group by lang 
+order by count desc limit 10;
+
+select user.name, user.followers_count as followers_count 
+from twitter.tweets order by followers_count desc limit 3;
+
+select entities.hashtags.text from twitter.tweets
+where (size(entities.hashtags.text) > 0) limit 15;
+
+create table twitter.hashtags as select id as id, entities.hashtags.text as words 
+from  twitter.tweets where (size(entities.hashtags.text) > 0);
+
+select * from twitter.hashtags limit 20;
+select count(*) from twitter.hashtags ;
+
+create table twitter.hashtag_words as select id as id ,hashtag from twitter.hashtags 
+LATERAL VIEW Explode (words) w as hashtag;
+
+select * from twitter.hashtag_words limit 15;
+
+select hashtag, count(hashtag) as count from twitter.hashtag_words
+group by hashtag order by count desc;
